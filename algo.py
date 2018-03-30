@@ -4,6 +4,8 @@ Powerbot demo algo script
 '''
 import os, logging,sys,json
 from datetime import datetime
+# Powerbot api generated automatically from the open-api sepecification using
+# https://swagger.io/swagger-codegen/
 from powerbot import Configuration, ApiClient
 from powerbot.api import MarketApi,  OrdersApi, LogsApi
 from powerbot.models import OrderEntry, OrderModify
