@@ -4,20 +4,23 @@ Powerbot demo signals script
 (c) 2018 Inercomp GmbH
 '''
 
+import os, logging, sys, json, random
+from datetime import datetime,timedelta
 from powerbot import Configuration, ApiClient
 from powerbot.api import SignalsApi
-import os, logging
-import json
-import random
-from datetime import datetime,timedelta
 
 ## Setting up logging and defining global variables
 logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger()
 
+#Demo script accepts api_key as commandline parameter or as an environmental variable
+api_key = str(sys.argv[1]) if  len(sys.argv) == 2 else os.getenv('POWERBOT_PLAYGROUND_API_KEY')
+if not api_key:
+    raise ValueError("Please provide your api_key on the command line or as the 'POWERBOT_PLAYGROUND_API_KEY' environmen variable")
+
 # Retrieving handles to the powerbot api
 client = ApiClient()
-client.set_default_header("api_key",os.environ['POWERBOT_PLAYGROUND_API_KEY'])
+client.set_default_header("api_key",api_key)
 
 signals = SignalsApi(client)
 

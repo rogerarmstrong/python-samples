@@ -2,23 +2,26 @@
 Powerbot demo algo script
 (c) 2018 Inercomp GmbH
 '''
-
+import os, logging,sys,json
+from datetime import datetime
 from powerbot import Configuration, ApiClient
 from powerbot.api import MarketApi,  OrdersApi, LogsApi
 from powerbot.models import OrderEntry, OrderModify
 from algo_helper import get_previous_values, get_signal_value
-import os, logging
-import json
-from datetime import datetime
 
 ## Setting up logging and defining global variables
 logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger()
 PRODUCT = "Intraday_Power_D"
 
+#Demo script accepts api_key as commandline parameter or as an environmental variable
+api_key = str(sys.argv[1]) if  len(sys.argv) == 2 else os.getenv('POWERBOT_PLAYGROUND_API_KEY')
+if not api_key:
+    raise ValueError("Please provide your api_key on the command line or as the 'POWERBOT_PLAYGROUND_API_KEY' environmen variable")
+    
 # Retrieving handles to the powerbot api
 client = ApiClient()
-client.set_default_header("api_key",os.environ['POWERBOT_PLAYGROUND_API_KEY'])
+client.set_default_header("api_key",api_key)
 
 market = MarketApi(client)
 orders = OrdersApi(client)
