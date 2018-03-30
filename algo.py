@@ -4,7 +4,7 @@ Powerbot demo algo script
 '''
 import os, logging,sys,json
 from datetime import datetime
-# Powerbot api generated automatically from the open-api sepecification using
+# Powerbot api generated automatically from the open-api specification using
 # https://swagger.io/swagger-codegen/
 from powerbot import Configuration, ApiClient
 from powerbot.api import MarketApi,  OrdersApi, LogsApi
@@ -19,9 +19,9 @@ PRODUCT = "Intraday_Power_D"
 #Demo script accepts api_key as commandline parameter or as an environmental variable
 api_key = str(sys.argv[1]) if  len(sys.argv) == 2 else os.getenv('POWERBOT_PLAYGROUND_API_KEY')
 if not api_key:
-    raise ValueError("Please provide your api_key on the command line or as the 'POWERBOT_PLAYGROUND_API_KEY' environmen variable")
+    raise ValueError("Please provide your api_key on the command line or as the 'POWERBOT_PLAYGROUND_API_KEY' environment variable")
     
-# Retrieving handles to the powerbot api
+# powerbot api client
 client = ApiClient()
 client.set_default_header("api_key",api_key)
 
